@@ -2,3 +2,5 @@
 pubsub channels
 
 pubsub numsub sms_send
+
+监控redis所执行的命令: monitor
