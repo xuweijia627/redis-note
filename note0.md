@@ -12,4 +12,4 @@ pubsub channels; pubsub numsub sms_send;
 #### AOF方式：
 一种增量备份的方式，默认不开启，开启配置：appendonly yes。
 
-AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文件)
+AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文件)，appendfsync everysec(每秒同步一次，默认策略)，appendfsync no(不同步)
