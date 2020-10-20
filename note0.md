@@ -17,4 +17,4 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 3. 过期数据的处理策略：主动处理(redis主动触发检测key是否过期)， 被动处理(访问key的时候发现已过期，清除)
 ### 内存回收策略
 1. 配置文件中设置：maxmemory-policy:回收策略 ，动态调整：config set maxmemory-policy:回收策略
-2. 回收策略, noeviction：不设置回收策略，达到阈值则报错，allkeys-lru：对所有key都执行LRU算法，volatile-lru：对所有已过期的key执行LRU，
+2. 回收策略, noeviction：不设置回收策略，达到阈值则报错，allkeys-lru：对所有key都执行LRU算法，volatile-lru：对所有已过期的key执行LRU，allkeys-lfu，volatile-lfu，allkeys-random，volatile-random，volatile-ttl
