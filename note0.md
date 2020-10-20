@@ -13,3 +13,8 @@ pubsub channels; pubsub numsub sms_send;
 AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文件)，appendfsync everysec(每秒同步一次，默认策略)，appendfsync no(不同步)。优点：安全。缺点：文件体积大，性能消耗比RDB高，恢复数据比RDB慢。
 ### 内存分配
 1. String: 一个String类型的value最大可存512M。Lists类型：list元素个数最多为2^32-1。 Sets类型：元素个数最多为2^32-1。Hashes类型：键值对个数最多为2^32-1。
+2. 最大内存控制：maxmemory(最大内存阈值)   maxmemory-policy(达到最大内存阈值后的执行策略)
+3. 过期数据的处理策略：主动处理(redis主动触发检测key是否过期)， 被动处理(访问key的时候发现已过期，清除)
+### 内存回收策略
+1. 配置文件中设置：maxmemory-policy:回收策略 ，动态调整：config set maxmemory-policy:回收策略
+2. 回收策略, noeviction：不设置回收策略，达到阈值则报错，allkeys-lru：对所有key都执行LRU算法，volatile-lru：对所有已过期的key执行LRU，
