@@ -19,3 +19,5 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 1. 配置文件中设置：maxmemory-policy:回收策略 ，动态调整：config set maxmemory-policy:回收策略
 2. 回收策略, noeviction：不设置回收策略，达到阈值则报错，allkeys-lru：对所有key都执行LRU算法，volatile-lru：对所有已过期的key执行LRU，allkeys-lfu，volatile-lfu，allkeys-random，volatile-random，volatile-ttl。
 3. 热点数据分析功能：redis-cli --hotkeys
+### 主从复制
+主redis以普通模式启动，从服务器的启动方式为：1.命令行slaveof ip port。 2.redis.conf配置文件中加 slaveof ip port, slave-read-only yes(从服务器是否只读，默认yes)
