@@ -21,3 +21,4 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 3. 热点数据分析功能：redis-cli --hotkeys
 ### 主从复制
 主redis以普通模式启动，从服务器的启动方式为：1.命令行slaveof ip port。 2.redis.conf配置文件中加 slaveof ip port, slave-read-only yes(从服务器是否只读，默认yes)。3.退出主从集群的方式：slaveof no one；查看主从状态: info replication
+### 哨兵
