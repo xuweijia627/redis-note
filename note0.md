@@ -21,6 +21,9 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 3. 热点数据分析功能：redis-cli --hotkeys
 ### 主从复制
 主redis以普通模式启动，从服务器的启动方式为：1.命令行slaveof ip port。 2.redis.conf配置文件中加 slaveof ip port, slave-read-only yes(从服务器是否只读，默认yes)。3.退出主从集群的方式：slaveof no one；查看主从状态: info replication
-* 主从复制的流程：1.从服务器通过psync(partial synchronization)命令发送同步源id，同步进度offset。2.master收到请求，如果同步源是当前master，则根据偏移量增量同步。3.如果同步源非当前master，
-则进入全量同步：master生成rdb,传给slave
+* 主从复制的流程：使用异步复制。1.从服务器通过psync(partial synchronization)命令发送同步源id，同步进度offset。2.master收到请求，如果同步源是当前master，则根据偏移量增量同步。3.如果同步源非当前master，则进入全量同步：master生成rdb,传给slave。
+* 一个master可以拥有多个slave。
+* slave可以接受其他slave的连接，slave可以有下级sub slave。
+* 主从同步过程在master侧是非阻塞的。
+* 主从复制的应用场景：读写分离
 ### 哨兵
