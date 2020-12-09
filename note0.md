@@ -38,4 +38,4 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 * 什么是master主观下线：哨兵给master发送的ping命令如果一段时间内没有得到回复，则哨兵会主观的(单方面地)认为master已经不可用了，对应的配置：sentinel down-after-milliseconds mymaster 1000
 * 客观下线：一定数量的哨兵认为master已经下线。检测机制：当哨兵主观认为master下线后，会通过sentinel is-master-down-by-addr命令询问其他哨兵是否认为master已经下线，如果一定数量的哨兵认为master已经下线，就会认为master客观下线，开始故障转移。对应的配置：sentinel monitor mymaster 192.168.100.241 6380 2
 * 哨兵之间如何通信：1.哨兵通过订阅master的__sentinel__:hello这个通道进行自动发现。2.哨兵之间直接发送命令通信。3.哨兵之间通过订阅发布进行通信。
-* 哨兵领导的选举机制：
+* 哨兵领导的选举机制：基于Raft算法实现的选举机制，1.哨兵之间发送拉票命令。2.如果没有收到或同意过其他节点的请求，就同意该哨兵的请求(每个哨兵只持有一个同意票数)。3.如果哨兵发现自己的票数超过一半，则成为领导，去执行故障转移。4.投票结束后，如果超过一段时间，没有哨兵去执行故障转移，则重新开始选举，sentinel failover-timeout mymaster 3000
