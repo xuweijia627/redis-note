@@ -37,3 +37,5 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 * 哨兵如何知道redis的主从信息：哨兵配置文件中需要配置master的信息，知道master信息后就可以通过info replication这个命令进行主从信息的自动发现。
 * 什么是master主观下线：哨兵给master发送的ping命令如果一段时间内没有得到回复，则哨兵会主观的(单方面地)认为master已经不可用了，对应的配置：sentinel down-after-milliseconds mymaster 1000
 * 客观下线：一定数量的哨兵认为master已经下线。检测机制：当哨兵主观认为master下线后，会通过sentinel is-master-down-by-addr命令询问其他哨兵是否认为master已经下线，如果一定数量的哨兵认为master已经下线，就会认为master客观下线，开始故障转移。对应的配置：sentinel monitor mymaster 192.168.100.241 6380 2
+* 哨兵之间如何通信：1.哨兵通过订阅master的__sentinel__:hello这个通道进行自动发现。2.哨兵之间直接发送命令通信。3.哨兵之间通过订阅发布进行通信。
+* 哨兵领导的选举机制：
