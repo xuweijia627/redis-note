@@ -33,3 +33,6 @@ AOF策略配置：appendfsync always(每次有数据修改时都会写入AOF文�
 * 3.选举一个哨兵作为故障转移的执行者
 * 4.执行者在slave中选一个作为新的master
 * 5.将其他slave设置为新master的从属
+#### 七大核心概念
+* 哨兵如何知道redis的主从信息：哨兵配置文件中需要配置master的信息，知道master信息后就可以通过info replication这个命令进行主从信息的自动发现。
+* 什么是master主观下线、：
